@@ -15,7 +15,7 @@
 	<br>
 	<hr>
 	<div class="topnav">
-		<a href="index.html">Home</a>
+		<a href="index.php">Home</a>
 		<a href="#aboutUs">About Us</a>
 		<a href="#contactUs">Contact Us</a>
 	</div>
@@ -30,22 +30,42 @@
 				</tr>
 			</table>
 			<hr>
-			<div id="header" class="mainHeader"><p>Lastname caf&eacute; Employee List!</p></div>
+			<div id="header" class="mainHeader"><p>Gulamali Saiyed's Caf&eacute; Employee List!</p></div>
 			<br>
 
-		<?php
-		$connection_string = "host=saiyed-db.cluster-c5gktblfi49r.us-east-1.rds.amazonaws.com port=5432 dbname=postgres user=postgres password=Bight0220";
-		$connection = pg_connect($connection_string) or die("Could not connect to the database: " . pg_last_error());
+            <?php
+            // Connection details
+            $connection_string = "host=saiyed-db-instance-1.c5gktblfi49r.us-east-1.rds.amazonaws.com port=5432 dbname=postgres user=postgres password=Bight0220";
 
+            // Try to establish a connection
+            $connection = pg_connect($connection_string);
 
-		$query = "SELECT * FROM final";
-		$result = pg_query($connection, $query) or die("Error reading data: " . pg_last_error());
+           
 
-		while ($row = pg_fetch_assoc($result)) {
-			echo "ID: " . $row['id'] . ", First Name: " . $row['fname'] . ", Last Name: " . $row['lname'] . ", Timestamp: " . $row['created_at'] . "\n";
-		}
+            // Fetch employee data (if connected successfully)
+            $query = "SELECT * FROM employee";
+            $result = pg_query($connection, $query);
 
-		?>
+            if ($result) {
+                echo "<table border='1'>";
+                echo "<tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Position</th><th>Created At</th></tr>";
+                while ($row = pg_fetch_assoc($result)) {
+                    echo "<tr>";
+                    echo "<td>" . $row['id'] . "</td>";
+                    echo "<td>" . $row['fname'] . "</td>";
+                    echo "<td>" . $row['lname'] . "</td>";
+                    echo "<td>" . $row['position'] . "</td>";
+                    echo "<td>" . $row['created_at'] . "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            } else {
+                echo "<p>Error fetching data: " . pg_last_error() . "</p>";
+            }
+            // Close the connection
+            pg_close($connection);
+            ?>
+
 		</div>
 	</div>
 </body> 
