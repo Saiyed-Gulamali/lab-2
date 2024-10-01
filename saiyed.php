@@ -34,7 +34,7 @@
 			<br>
 
 		<?php
-		$connection_string = "host=saiyed-db.cluster-c5gktblfi49r.us-east-1.rds.amazonaws.com port=5432 dbname=saiyed-db user=postgres password=Bight0220";
+		$connection_string = "host=saiyed-db.cluster-c5gktblfi49r.us-east-1.rds.amazonaws.com port=5432 dbname=postgres user=postgres password=Bight0220";
 		$connection = pg_connect($connection_string) or die("Could not connect to the database: " . pg_last_error());
 
 
