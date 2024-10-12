@@ -35,7 +35,7 @@
 
             <?php
             // Connection details
-            $connection_string = "host=saiyed.c5ywmyoi8flm.ca-central-1.rds.amazonaws.com port=5432 dbname=saiyed user=postgres password=Night0220";
+            $connection_string = "host=saiyed-instance-1.c5ywmyoi8flm.ca-central-1.rds.amazonaws.com port=5432 dbname=saiyed user=postgres password=Night0220";
 
             // Try to establish a connection
             $connection = pg_connect($connection_string);
